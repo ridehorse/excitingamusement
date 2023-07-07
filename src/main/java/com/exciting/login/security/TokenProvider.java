@@ -6,7 +6,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
 import com.exciting.entity.Member;
@@ -49,6 +51,20 @@ public class TokenProvider {
 				.setExpiration(expiryDate)
 				.compact();
 		
+	
+	}
+	
+	public String create(final Authentication authentication) {
+		
+		ApplicationOAuth2User userPrincipal = (ApplicationOAuth2User)authentication.getPrincipal();
+		
+		Date expiryDate = Date.from(Instant.now().plus(1,ChronoUnit.DAYS));
+		
+		return Jwts.builder().setSubject(userPrincipal.getName())
+				.setIssuedAt(new Date())
+				.setExpiration(expiryDate)
+				.signWith(SignatureAlgorithm.HS512, SECRET_KEY)
+				.compact();
 	
 	}
 	

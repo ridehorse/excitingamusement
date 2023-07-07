@@ -97,6 +97,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter{
 			return bearerToken.substring(7);
 		}
 		
+		log.info("bearerToken 함수 끝");
 		return null;
 		
 		

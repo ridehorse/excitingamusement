@@ -8,7 +8,7 @@ group = 'com.exciting'
 version = '0.0.1-SNAPSHOT'
 
 java {
-	sourceCompatibility = '17'
+	sourceCompatibility = '11'
 }
 
 configurations {
@@ -55,6 +55,9 @@ dependencies {
     implementation 'commons-fileupload:commons-fileupload:1.4'
     // 파일업로드 끝
 	
+	// git
+	// https://mvnrepository.com/artifact/org.springframework.security/spring-security-oauth2-client
+    implementation 'org.springframework.security:spring-security-oauth2-client:5.6.1'
 	
 	
 	

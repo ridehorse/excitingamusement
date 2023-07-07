@@ -62,5 +62,6 @@ public class Member {
 	
 	private String roles;
     
+	private String authProvider;
 
 }
