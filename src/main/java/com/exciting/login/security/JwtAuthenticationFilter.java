@@ -59,7 +59,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter{
 			role.add(roles);
 			
 //			인증완료; SecurityContextHolder에 등록해야 인증된 사용자라고 생각한다.
-//			UsernamePasswordAuthenticationToken을 작성(첫번째 매개변수 userId가, @AuthenticationPrincipal 애너테이션의 값이 된다.)
+//			UsernamePasswordAuthenticationToken을 작성(첫번째 매개변수 member_id가, @AuthenticationPrincipal 애너테이션의 값이 된다.)
 //			AbstractAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(member_id, null,AuthorityUtils.NO_AUTHORITIES);
 			AbstractAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(member_id, null,role.stream()
 	                .map(SimpleGrantedAuthority::new)

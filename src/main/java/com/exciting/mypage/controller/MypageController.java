@@ -57,7 +57,11 @@ public class MypageController {
 
 	//	회원수정 페이지에서 사용자가 입력한값 DB에 업데이트
 	@PostMapping("/editMember")
-	public int editMember(@AuthenticationPrincipal String id, @RequestBody MemberDTO memberDTO){
+	public int editMember(@AuthenticationPrincipal String member_id){
+		
+		System.out.println("/editMember / memeber_id : "+ member_id);
+		
+		MemberDTO memberDTO = MemberDTO.builder().member_id(member_id).build();
 
 		int result = mypageService.updateMember(memberDTO);
 
@@ -67,9 +71,10 @@ public class MypageController {
 
 	//	member_id와 일치하는 회원정보 모두 DTO로 반환
 	@PostMapping("/getMember")
-	public ResponseEntity<?> getMember(@RequestBody MemberDTO memberDTO){
-		System.out.println("getMember 진입 / memberDTO : "+ memberDTO);
-
+	public ResponseEntity<?> getMember(@AuthenticationPrincipal String member_id){
+		System.out.println("getMember 진입 / member_id  : "+ member_id);
+		
+		MemberDTO memberDTO = MemberDTO.builder().member_id(member_id).build();
 
 		MemberDTO responseDTO = loginService.getByMember_id(memberDTO);
 
@@ -81,7 +86,7 @@ public class MypageController {
 	@PostMapping("/getMemberByKakaoId")
 	public ResponseEntity<?> getMemberByKakaoId(@RequestBody MemberDTO memberDTO){
 		System.out.println("getMemberByKakaoId 진입 / memberDTO : "+ memberDTO);
-
+		
 		MemberDTO responseDTO = loginService.getByKakao_id(memberDTO);
 
 		return ResponseEntity.ok().body(responseDTO);
@@ -90,15 +95,17 @@ public class MypageController {
 
 	// member_id와 일치하는 게시판/댓글 반환
 	@PostMapping("/getList")
-	public void getList(@RequestBody MemberDTO memberDTO){
-		System.out.println("getList 진입 / memberDTO : "+ memberDTO);
-
+	public void getList(@AuthenticationPrincipal String member_id){
+		System.out.println("getList 진입 / member_id : "+ member_id);
+		
+		MemberDTO memberDTO = MemberDTO.builder().member_id(member_id).build();
+		
 		System.out.println("member_id : "+memberDTO);
 	}
 
 
 	@PostMapping("/upload")
-	public ResponseEntity<?> write(@RequestParam("file") MultipartFile file,@RequestParam("member_id") String member_id) throws IOException {
+	public ResponseEntity<?> write(@RequestParam("file") MultipartFile file,@AuthenticationPrincipal String member_id) throws IOException {
 
 
 		System.out.println("/upload 진입");
@@ -142,29 +149,10 @@ public class MypageController {
 	}
 
 
-
-
-	public String getUploadPath(HttpServletRequest request, int pathFlag) {
-		//업로드 경로 구하기
-		//업로드경로를 설정해도 이클립스에서는 다른 경로를 사용하므로, test경로를 따로사용해야하고
-		//직접배포했을시에는 getRealPath()를 사용하면 경로가 잘 잡히기 때문에,
-		//테스트경로가 따로 필요함
-		String path = "";
-
-
-		//실제 물리적인 경로 구하기
-		path = request.getSession().getServletContext().getRealPath(path);
-
-		System.out.println("엽로드 경로 : "+path);
-
-
-
-		return path;
-	}
-
+	
 	//	내 게시물 보기 링크 누르면 오는곳(react용)
 	@GetMapping(value = "/writeList/{id}")
-	public ResponseEntity<?> writeListGet(@PathVariable("id") int id,@RequestParam("member_id") String member_id,@RequestParam("sort") String sort,Criteria cri,HttpServletRequest request) {
+	public ResponseEntity<?> writeListGet(@PathVariable("id") int id,@AuthenticationPrincipal String member_id,@RequestParam("sort") String sort,Criteria cri,HttpServletRequest request) {
 		System.out.println("writeList.get() 접근(react)");
 		System.out.println("writeList()/request : "+request.getSession() );
 		System.out.println("writeList()/criteria : "+cri.getMember_id() );
@@ -256,7 +244,7 @@ public class MypageController {
 
 	//	writeList.jsp 에서 과거순 목록 클릭시 오는곳(react)	
 	@GetMapping(value = "/pastPost/{id}")
-	public ResponseEntity<?> pastPost(@PathVariable("id") int id,@RequestParam("member_id") String member_id,Criteria cri,HttpServletRequest request,HttpServletResponse response){
+	public ResponseEntity<?> pastPost(@PathVariable("id") int id,@AuthenticationPrincipal String member_id,Criteria cri,HttpServletRequest request,HttpServletResponse response){
 		System.out.println("/pastPost 진입!!");
 
 		int limitNum;
@@ -322,7 +310,7 @@ public class MypageController {
 	}
 	
 	@PostMapping("/byebye")
-	public int deleteMember(@RequestParam("member_id") String member_id) {
+	public int deleteMember(@AuthenticationPrincipal String member_id) {
 		
 		return loginService.deleteMember(member_id);
 	}

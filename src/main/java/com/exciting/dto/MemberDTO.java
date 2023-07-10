@@ -39,9 +39,13 @@ public class MemberDTO {
 	
 	String m_kakao_id;
 	
+	String m_github_id;
+	
 //	int m_point;
 	
 	String m_image;
 	
 	String roles;
+	
+	
 }

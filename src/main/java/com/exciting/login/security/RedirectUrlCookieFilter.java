@@ -17,8 +17,9 @@ import lombok.extern.slf4j.Slf4j;
 // RedirectUrlCokkieFilter class : session을 생성해서 response에 저장한다. 
 @Slf4j
 @Component
-public class RedirectUrlCokkieFilter extends OncePerRequestFilter {
+public class RedirectUrlCookieFilter extends OncePerRequestFilter {
 	
+//	react단에서 쿼리 파라미터로 redirect_uri 를 보낸다. 그값을 읽어오는 것이다.
 	public static final String REDIRECT_URI_PARAM = "redirect_uri";
 	private static final int MAX_AGE = 180;
 	
@@ -30,6 +31,7 @@ public class RedirectUrlCokkieFilter extends OncePerRequestFilter {
 				log.info("request url {} ",request.getRequestURI());
 //				리퀘스트 파라미터에서 redirect_url을 가져온다.
 				String redirectUrl = request.getParameter(REDIRECT_URI_PARAM);
+				System.out.println("RedirectUrlCookieFilter / redirectUrl / : "+redirectUrl);
 				
 				Cookie cookie = new Cookie(REDIRECT_URI_PARAM,redirectUrl);
 				cookie.setPath("/");

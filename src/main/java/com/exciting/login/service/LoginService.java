@@ -38,6 +38,8 @@ public class LoginService {
 		
 		return loginRepository.save(memberEntity);
 	}
+	
+
 
 	
 	
@@ -133,6 +135,12 @@ public class LoginService {
 	public Boolean existsByM_kakao_id(final MemberDTO memberDTO) {
 		String m_kakao_id = memberDTO.getM_kakao_id();
 		return loginRepository.existsByM_kakao_id(m_kakao_id);
+	}
+	
+//	MemberDTO 를 받아서 m_github_id와 일치하는 행이 있는지 검사 후 있으면 trun, 없으면 false 반환.
+	public Boolean existsByM_github_id(final MemberDTO memberDTO) {
+		String m_github_id = memberDTO.getMember_id();
+		return loginRepository.existsByM_github_id(m_github_id);
 	}
 	
 //	controller 단마다 실행할 인증

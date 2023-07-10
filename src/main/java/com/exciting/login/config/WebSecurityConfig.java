@@ -14,7 +14,7 @@ import org.springframework.web.filter.CorsFilter;
 import com.exciting.login.security.JwtAuthenticationFilter;
 import com.exciting.login.security.OAuthSuccessHandler;
 import com.exciting.login.security.OAuthUserServiceImpl;
-import com.exciting.login.security.RedirectUrlCokkieFilter;
+import com.exciting.login.security.RedirectUrlCookieFilter;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -33,7 +33,7 @@ public class WebSecurityConfig {
 	private OAuthSuccessHandler oAuthSuccessHandler;
 	
 	@Autowired
-	private RedirectUrlCokkieFilter redirectUrlFilter;
+	private RedirectUrlCookieFilter redirectUrlFilter;
 	
 //	HttpSecurity : 시큐리티 섲렁을 위한 오브젝트(web.xml 대신 HttpSecurity를 이용해 시큐리티 관련 설정을 하는것)
 	@Bean
@@ -50,9 +50,9 @@ public class WebSecurityConfig {
 			.and()
 			.authorizeRequests() // /와 /login/** 경로는 인증 안 해도 됨.
 			.antMatchers("/").permitAll()
-			.antMatchers("/mypage/getMember","/mypage/upload").hasRole("user")
 			.antMatchers("/login/**","/email","/mypage/getMemberByKakaoId").permitAll()
 			.antMatchers("/auth/**","/login/authGit/**").permitAll()
+			.antMatchers("/mypage/getMember","/mypage/upload").hasRole("user") 
 			.anyRequest() // antMatchers를 제외한 모든 API
 			.authenticated()// token 인증이 있어야 함, 역할 까지는 필요 없음
 		    .and()

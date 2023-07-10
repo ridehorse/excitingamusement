@@ -56,12 +56,13 @@ public class Member {
 	
 	private String m_kakao_id;
 	
+	private String m_github_id;
+	
 //	private int m_point;
 	
 	private String token;
 	
 	private String roles;
     
-	private String authProvider;
 
 }

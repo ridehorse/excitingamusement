@@ -23,6 +23,9 @@ public interface LoginRepository extends JpaRepository<Member, String>{
 	@Query("SELECT CASE WHEN COUNT(m) > 0 AND m.m_kakao_id <> 'false' THEN true ELSE false END FROM Member m WHERE m.m_kakao_id = :m_kakao_id")
 	Boolean existsByM_kakao_id(@Param("m_kakao_id") String m_kakao_id);
 	
+	@Query("SELECT CASE WHEN COUNT(m) > 0 AND m.m_github_id <> 'false' THEN true ELSE false END FROM Member m WHERE m.m_kakao_id = :m_github_id")
+	Boolean existsByM_github_id(@Param("m_github_id") String m_github_id);
+	
 	Optional<Member> findById(@Param("id") String id);
 	
 	@Query("SELECT m FROM Member m WHERE m.m_kakao_id = :m_kakao_id")
