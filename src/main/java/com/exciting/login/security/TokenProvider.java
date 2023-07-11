@@ -57,6 +57,7 @@ public class TokenProvider {
 	public String create(final Authentication authentication) {
 		
 		ApplicationOAuth2User userPrincipal = (ApplicationOAuth2User)authentication.getPrincipal();
+		System.out.println("TokenProvider / create / userPrincipal : "+userPrincipal.getName());
 		
 		Date expiryDate = Date.from(Instant.now().plus(1,ChronoUnit.DAYS));
 		

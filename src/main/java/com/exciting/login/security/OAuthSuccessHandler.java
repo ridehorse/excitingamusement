@@ -38,7 +38,7 @@ public class OAuthSuccessHandler extends SimpleUrlAuthenticationSuccessHandler{
 		Optional<String> redirectUri = oCookie.map(Cookie::getValue);
 		
 	
-		log.info("token{}",token);
+		log.info("token {}",token);
 		response.sendRedirect(redirectUri.orElseGet(()-> LOCAL_REDIRECT_URL) + "/githublogin?token="+token);
 		
 	}

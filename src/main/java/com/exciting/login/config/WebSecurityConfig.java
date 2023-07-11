@@ -49,10 +49,10 @@ public class WebSecurityConfig {
 			.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 			.and()
 			.authorizeRequests() // /와 /login/** 경로는 인증 안 해도 됨.
-			.antMatchers("/").permitAll()
-			.antMatchers("/login/**","/email","/mypage/getMemberByKakaoId").permitAll()
-			.antMatchers("/auth/**","/login/authGit/**").permitAll()
-			.antMatchers("/mypage/getMember","/mypage/upload").hasRole("user") 
+			.mvcMatchers("/").permitAll()
+			.mvcMatchers("/login/**","/email","/mypage/getMemberByKakaoId").permitAll()
+			.mvcMatchers("/auth/**","/login/authGit/**").permitAll()
+			.mvcMatchers("/mypage/getMember","/mypage/upload").hasRole("user") 
 			.anyRequest() // antMatchers를 제외한 모든 API
 			.authenticated()// token 인증이 있어야 함, 역할 까지는 필요 없음
 		    .and()
