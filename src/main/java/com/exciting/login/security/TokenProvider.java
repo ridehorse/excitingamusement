@@ -11,7 +11,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
-import com.exciting.entity.Member;
+import com.exciting.login.entity.Member;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -54,14 +54,21 @@ public class TokenProvider {
 	
 	}
 	
+	
+	
 	public String create(final Authentication authentication) {
 		
 		ApplicationOAuth2User userPrincipal = (ApplicationOAuth2User)authentication.getPrincipal();
+//		소셜 아이디로에 등록된 member_id
 		System.out.println("TokenProvider / create / userPrincipal : "+userPrincipal.getName());
+		
+		Claims claims = Jwts.claims().setSubject(userPrincipal.getName());
+		claims.put("roles", "ROLE_user");
 		
 		Date expiryDate = Date.from(Instant.now().plus(1,ChronoUnit.DAYS));
 		
-		return Jwts.builder().setSubject(userPrincipal.getName())
+		return Jwts.builder()
+				.setClaims(claims)
 				.setIssuedAt(new Date())
 				.setExpiration(expiryDate)
 				.signWith(SignatureAlgorithm.HS512, SECRET_KEY)

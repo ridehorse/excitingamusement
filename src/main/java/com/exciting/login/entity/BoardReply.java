@@ -1,10 +1,11 @@
-package com.exciting.entity;
+package com.exciting.login.entity;
 
 import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -18,19 +19,18 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="inquery")
-public class Inquery {
+@Table(name="boardreply")
+public class BoardReply {
 	
 	@Id
-	private int inquiry_num;
-	private String b_type;
-	private String b_title;
-	private String b_content;
+	private int reply_num;
+	private int board_id;
 	private String member_id;
-//	@CreationTimestamp
+	private String b_reply;
 	private Date postdate;
-	private int ref; 
-	private int lev;
+	private int ref;
 	private int seq;
+	private int lev;
+	
 	
 }

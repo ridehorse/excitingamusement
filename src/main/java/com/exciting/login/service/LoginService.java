@@ -7,8 +7,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.exciting.dto.MemberDTO;
-import com.exciting.entity.Member;
+import com.exciting.login.dto.MemberDTO;
+import com.exciting.login.entity.Member;
 import com.exciting.login.persistence.LoginRepository;
 
 import lombok.extern.slf4j.Slf4j;
@@ -39,7 +39,27 @@ public class LoginService {
 		return loginRepository.save(memberEntity);
 	}
 	
-
+	
+//	memberEntity로 member table에 저장
+	public int gitMemberUpdate(final Member memberEntity) {
+		if(memberEntity == null || memberEntity.getMember_id() == null) {
+			throw new RuntimeException("Invalid arguments");
+		}
+		
+		String member_id = memberEntity.getMember_id();
+		String m_gender = memberEntity.getM_gender();
+		String m_birth = memberEntity.getM_birth();
+		String m_address = memberEntity.getM_address();
+		String m_email = memberEntity.getM_email();
+		String m_name = memberEntity.getM_name();
+		String m_phone = memberEntity.getM_phone();
+		String m_pass = passwordEncoder.encode(memberEntity.getM_pass());
+		String m_kakao_id = memberEntity.getM_kakao_id();
+		
+		
+		return loginRepository.gitMemberUpdate(member_id,m_gender,m_birth,m_address,m_email,m_name,m_phone,m_pass,m_kakao_id);
+	}
+	
 
 	
 	
@@ -141,6 +161,11 @@ public class LoginService {
 	public Boolean existsByM_github_id(final MemberDTO memberDTO) {
 		String m_github_id = memberDTO.getMember_id();
 		return loginRepository.existsByM_github_id(m_github_id);
+	}
+	
+//	MemberDTO 를 받아서 m_github_id와 일치하는 행이 있는지 검사 후 있으면 trun, 없으면 false 반환.
+	public Boolean getNameByM_github_id(final String m_github_id) {
+		return loginRepository.getNameByM_github_id(m_github_id);
 	}
 	
 //	controller 단마다 실행할 인증

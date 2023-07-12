@@ -7,8 +7,8 @@ import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
-import com.exciting.dto.MemberDTO;
-import com.exciting.entity.Member;
+import com.exciting.login.dto.MemberDTO;
+import com.exciting.login.entity.Member;
 import com.exciting.login.persistence.LoginRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -57,6 +57,7 @@ public class OAuthUserServiceImpl extends DefaultOAuth2UserService{
 			memberEntity = Member.builder()
 							.member_id(member_id)
 							.m_github_id(m_github_id)
+							.roles("ROLE_user")
 							.build();
 			
 			memberEntity = loginRepository.save(memberEntity);

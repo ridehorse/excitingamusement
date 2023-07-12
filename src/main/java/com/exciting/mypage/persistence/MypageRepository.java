@@ -10,8 +10,8 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import com.exciting.dto.MypageDTO;
-import com.exciting.entity.Member;
+import com.exciting.login.dto.MypageDTO;
+import com.exciting.login.entity.Member;
 
 public interface MypageRepository extends JpaRepository<Member, String>{
 	

@@ -1,8 +1,6 @@
-package com.exciting.dto;
+package com.exciting.login.dto;
 
 import java.util.Date;
-
-import org.hibernate.annotations.CreationTimestamp;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,18 +11,17 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class BoardDTO {
-
+public class InquiryDTO {
 	
-	int board_id;
+	int inquiry_num;
+	String b_type;
 	String b_title;
 	String b_content;
-	Date postdate;
-	int visitcount;
-	String b_type;
-	int level;
 	String member_id;
-	int favorite;
-	int hate;
+	
+	Date postdate;
+	int ref; 
+	int lev;
+	int seq;
 
 }

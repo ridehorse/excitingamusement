@@ -1,4 +1,4 @@
-package com.exciting.dto;
+package com.exciting.login.dto;
 
 public class PagingDTO {
 	

@@ -20,9 +20,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.exciting.dto.MemberDTO;
 import com.exciting.dto.ResponseDTO;
-import com.exciting.entity.Member;
+import com.exciting.login.dto.MemberDTO;
+import com.exciting.login.entity.Member;
 import com.exciting.login.persistence.LoginRepository;
 import com.exciting.login.security.TokenProvider;
 import com.exciting.login.service.LoginService;

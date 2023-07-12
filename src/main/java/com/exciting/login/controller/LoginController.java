@@ -13,13 +13,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.exciting.dto.BoardDTO;
-import com.exciting.dto.BoardReplyDTO;
-import com.exciting.dto.MemberDTO;
 import com.exciting.dto.ResponseDTO;
-import com.exciting.entity.Board;
-import com.exciting.entity.BoardReply;
-import com.exciting.entity.Member;
+import com.exciting.login.dto.BoardDTO;
+import com.exciting.login.dto.BoardReplyDTO;
+import com.exciting.login.dto.MemberDTO;
+import com.exciting.login.entity.Board;
+import com.exciting.login.entity.BoardReply;
+import com.exciting.login.entity.Member;
 import com.exciting.login.persistence.LoginRepository;
 import com.exciting.login.security.TokenProvider;
 import com.exciting.login.service.LoginService;
@@ -73,7 +73,12 @@ public class LoginController {
 				.build();
 		
 		System.out.println("/login/signup : user : "+user);
-
+		
+//		git접속 회원가입이라서 gg_인 아이디가 이미 존재할때
+		if(memberDTO.getMember_id().substring(0, 3).equals("gg_")) {
+			int result = loginService.gitMemberUpdate(user);
+			return ResponseEntity.ok().body(result);
+		}
 		
 //		서비스를 이용해 DB에 유저 저장(저장한값 UserEntity 형태로 반환)
 		Member registeredUser = loginService.memberCreate(user);
@@ -127,8 +132,11 @@ public class LoginController {
 					.m_gender(member.getM_gender())
 					.m_regidate(member.getM_regidate())
 					.m_kakao_id(member.getM_kakao_id())
+					.m_github_id(member.getM_github_id())
 					.token(token)
+					.roles(member.getRoles())
 					.build();
+			System.out.println("signin/ roles : "+member.getRoles());
 			return ResponseEntity.ok().body(responseMemberDTO);
 		}else {
 			ResponseDTO responseDTO = ResponseDTO.builder()

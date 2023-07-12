@@ -1,4 +1,4 @@
-package com.exciting.entity;
+package com.exciting.login.entity;
 
 import java.util.Date;
 
@@ -19,18 +19,19 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="boardreply")
-public class BoardReply {
+@Table(name="board",uniqueConstraints = {@UniqueConstraint(columnNames = "board_id")})
+public class Board {
 	
 	@Id
-	private int reply_num;
 	private int board_id;
-	private String member_id;
-	private String b_reply;
+	private String b_title;
+	private String b_content;
+	@CreationTimestamp
 	private Date postdate;
-	private int ref;
-	private int seq;
-	private int lev;
-	
-	
+	private int visitcount;
+	private String b_type;
+	private int level;
+	private String member_id;
+	private int favorite;
+	private int hate;
 }

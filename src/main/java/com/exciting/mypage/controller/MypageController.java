@@ -28,11 +28,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.exciting.dto.Criteria;
-import com.exciting.dto.MemberDTO;
-import com.exciting.dto.MypageDTO;
-import com.exciting.dto.PagingDTO;
-import com.exciting.entity.Member;
+import com.exciting.login.dto.Criteria;
+import com.exciting.login.dto.MemberDTO;
+import com.exciting.login.dto.MypageDTO;
+import com.exciting.login.dto.PagingDTO;
+import com.exciting.login.entity.Member;
 import com.exciting.login.security.TokenProvider;
 import com.exciting.login.service.LoginService;
 import com.exciting.mypage.service.MypageService;

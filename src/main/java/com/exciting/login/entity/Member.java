@@ -1,4 +1,4 @@
-package com.exciting.entity;
+package com.exciting.login.entity;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -44,6 +44,7 @@ public class Member {
 	
 	private String m_address;
 	
+	@Column(name = "regidate", columnDefinition = "datetime DEFAULT CURRENT_TIMESTAMP")
 	private Date m_regidate;
 	
 	private String m_phone;

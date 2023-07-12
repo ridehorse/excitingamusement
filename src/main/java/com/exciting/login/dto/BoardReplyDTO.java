@@ -1,6 +1,7 @@
-package com.exciting.dto;
+package com.exciting.login.dto;
 
 import java.util.Date;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,17 +12,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class InquiryDTO {
-	
-	int inquiry_num;
-	String b_type;
-	String b_title;
-	String b_content;
-	String member_id;
-	
-	Date postdate;
-	int ref; 
-	int lev;
-	int seq;
+public class BoardReplyDTO {
 
+	int reply_num;
+	int board_id;
+	String member_id;
+	String b_reply;
+	Date postdate;
+	int ref;
+	int seq;
+	int lev;
+	
 }
