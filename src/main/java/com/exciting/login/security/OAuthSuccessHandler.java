@@ -47,7 +47,9 @@ public class OAuthSuccessHandler extends SimpleUrlAuthenticationSuccessHandler{
 		System.out.println("onAuthenticationSuccess / authentication/ name : " + getPrincipal.getClass());
 		
 //		m_git_id 행의 m_name이 null(회원가입 x) 이면 false null이 아니면(회원가입 o) true 
-		Boolean result = loginService.getNameByM_github_id(getPrincipal.getName());
+		int result = loginService.getNameByM_github_id((String)getPrincipal.getAttributes().get("login"));
+		System.out.println("result : "+result);
+
 		
 		Optional<Cookie> oCookie = Arrays.stream(request.getCookies()).filter(cookie -> cookie.getName().equals(cookieFilter.REDIRECT_URI_PARAM)).findFirst(); 
 		Optional<String> redirectUri = oCookie.map(Cookie::getValue);

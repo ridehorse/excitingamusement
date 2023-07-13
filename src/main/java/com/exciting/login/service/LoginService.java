@@ -164,7 +164,7 @@ public class LoginService {
 	}
 	
 //	MemberDTO 를 받아서 m_github_id와 일치하는 행이 있는지 검사 후 있으면 trun, 없으면 false 반환.
-	public Boolean getNameByM_github_id(final String m_github_id) {
+	public int getNameByM_github_id(final String m_github_id) {
 		return loginRepository.getNameByM_github_id(m_github_id);
 	}
 	

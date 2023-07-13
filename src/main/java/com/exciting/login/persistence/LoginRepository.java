@@ -46,8 +46,8 @@ public interface LoginRepository extends JpaRepository<Member, String>{
     @Query("UPDATE Member m SET m.m_name = 'deleted', m.m_birth = 'deleted', m.m_pass = 'deleted', m.m_email = 'deleted', m.m_address = 'deleted', m.m_phone = 'deleted', m.m_gender = 'deleted', m.m_image = 'deleted', m.m_kakao_id = 'deleted', m.roles = 'deleted' WHERE m.member_id = :member_id")
     int deleteMember(@Param("member_id") String member_id);
 	
-	@Query("SELECT CASE WHEN (m.m_name IS NULL) THEN false ELSE true END FROM Member m WHERE m.m_github_id = :m_github_id")
-	Boolean getNameByM_github_id(@Param("m_github_id") String m_github_id); 
+	@Query("SELECT CASE WHEN (m.m_name IS NULL) THEN 0 ELSE 1 END FROM Member m WHERE m.m_github_id = :m_github_id")
+	int getNameByM_github_id(@Param("m_github_id") String m_github_id); 
 	
 	@Transactional
 	@Modifying

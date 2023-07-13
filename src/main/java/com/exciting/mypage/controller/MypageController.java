@@ -57,11 +57,10 @@ public class MypageController {
 
 	//	회원수정 페이지에서 사용자가 입력한값 DB에 업데이트
 	@PostMapping("/editMember")
-	public int editMember(@AuthenticationPrincipal String member_id){
+	public int editMember(@RequestBody MemberDTO memberDTO){
 		
-		System.out.println("/editMember / memeber_id : "+ member_id);
+		System.out.println("/editMember / memberDTO : "+ memberDTO);
 		
-		MemberDTO memberDTO = MemberDTO.builder().member_id(member_id).build();
 
 		int result = mypageService.updateMember(memberDTO);
 

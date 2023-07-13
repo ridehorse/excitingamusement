@@ -51,7 +51,7 @@ public class WebSecurityConfig {
 			.authorizeRequests() // /와 /login/** 경로는 인증 안 해도 됨.
 			.mvcMatchers("/").permitAll()
 			.mvcMatchers("/login/**","/email","/mypage/getMemberByKakaoId").permitAll()
-			.mvcMatchers("/auth/**","/login/authGit/**").permitAll()
+			.mvcMatchers("/auth/**","/login/authGit/**","/mypage/editMember").permitAll()
 			.mvcMatchers("/mypage/getMember","/mypage/upload","/mypage/getList","/mypage/writeList/*","/mypage/pastPost/*","/mypage/byebye").hasAnyRole("user","admin")
 			.anyRequest() // antMatchers를 제외한 모든 API
 			.authenticated()// token 인증이 있어야 함, 역할 까지는 필요 없음

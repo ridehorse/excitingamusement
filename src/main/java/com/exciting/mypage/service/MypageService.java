@@ -31,11 +31,9 @@ public class MypageService {
 		String m_address = memberDTO.getM_address();
 		String m_birth = memberDTO.getM_birth();
 		String m_email = memberDTO.getM_email();
-		String m_gender = memberDTO.getM_gender();
 		String m_phone = memberDTO.getM_phone();
-		String m_pass = passwordEncoder.encode(memberDTO.getM_pass());
 
-		int result = mypageRepository.updateMember(member_id,m_pass,m_email,m_birth,m_address,m_phone,m_gender);
+		int result = mypageRepository.updateMember(member_id,m_email,m_birth,m_address,m_phone);
 
 		return result;
 

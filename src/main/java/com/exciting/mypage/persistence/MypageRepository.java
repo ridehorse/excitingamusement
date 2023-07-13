@@ -17,8 +17,8 @@ public interface MypageRepository extends JpaRepository<Member, String>{
 	
 	@Transactional
 	@Modifying
-    @Query("UPDATE Member m SET m.m_pass = :m_pass,m.m_phone = :m_phone,m.m_email = :m_email,m.m_address = :m_address,m.m_birth = :m_birth,m.m_gender = :m_gender WHERE m.member_id = :member_id")
-    int updateMember(@Param("member_id") String member_id, @Param("m_pass") String m_pass, @Param("m_email") String m_email, @Param("m_birth") String m_birth, @Param("m_address") String m_address, @Param("m_phone") String m_phone, @Param("m_gender") String m_gender);
+    @Query("UPDATE Member m SET m.m_phone = :m_phone,m.m_email = :m_email,m.m_address = :m_address,m.m_birth = :m_birth WHERE m.member_id = :member_id")
+    int updateMember(@Param("member_id") String member_id,@Param("m_email") String m_email, @Param("m_birth") String m_birth, @Param("m_address") String m_address, @Param("m_phone") String m_phone);
 	
 	@Query(value = "SELECT COUNT(*) FROM("
 	        + "SELECT member_id, b_title, b_content, postdate FROM inquiry a "
