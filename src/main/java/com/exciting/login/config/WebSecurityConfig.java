@@ -53,6 +53,8 @@ public class WebSecurityConfig {
 			.mvcMatchers("/login/**","/email","/mypage/getMemberByKakaoId").permitAll()
 			.mvcMatchers("/auth/**","/login/authGit/**","/mypage/editMember").permitAll()
 			.mvcMatchers("/mypage/getMember","/mypage/upload","/mypage/getList","/mypage/writeList/*","/mypage/pastPost/*","/mypage/byebye").hasAnyRole("user","admin")
+			.mvcMatchers("/selectedapi/**","/list/**").permitAll() // 동욱님
+			.mvcMatchers("/selectedapi/**").permitAll() // 덕용님
 			.anyRequest() // antMatchers를 제외한 모든 API
 			.authenticated()// token 인증이 있어야 함, 역할 까지는 필요 없음
 		    .and()
